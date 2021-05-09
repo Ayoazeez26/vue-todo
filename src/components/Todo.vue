@@ -14,75 +14,39 @@
         {{ tab }}
       </h4>
     </div>
-    <div
-      class="all mt-6 w-full"
-      v-show="selectedTab === 'All' || selectedTab === 'Active'"
-    >
-      <form class="flex justify-between items-center" @submit.prevent="addTodo">
-        <input
-          type="text"
-          placeholder="add details"
-          v-model="newTodo"
-          class="border focus:outline-none rounded-lg p-3 w-3/4"
-        />
-        <button
-          class="bg-blue-500 focus:outline-none font-semibold text-sm text-white py-3 px-6 rounded-lg"
-          type="submit"
-        >
-          Add
-        </button>
-      </form>
-      <ul class="mt-3">
-        <li
-          class="flex items-center"
-          v-for="(todo, index) in getTodos"
-          :key="index"
-        >
-          <input
-            type="checkbox"
-            v-model="checkedTasks"
-            class="checkbox mr-2 w-5 h-5"
-          />
-          <label class="text-black font-medium text-lg" for="checkbox">
-            {{ todo.task }}
-          </label>
-        </li>
-      </ul>
+    <div class="mt-6 w-full">
+      <input-form :selectedTab="selectedTab" />
+      <all :selectedTab="selectedTab" />
+      <active :selectedTab="selectedTab" />
+      <completed :selectedTab="selectedTab" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import InputForm from "./InputForm.vue";
+import All from "./All.vue";
+import Active from "./Active.vue";
+import Completed from "./Completed.vue";
+// import { mapActions } from "vuex";
 export default {
+  components: {
+    InputForm,
+    All,
+    Active,
+    Completed,
+  },
   data() {
     return {
       tabs: ["All", "Active", "Completed"],
       selectedTab: "All",
-      newTodo: "",
-      checkedTasks: [],
     };
-  },
-  computed: {
-    ...mapGetters(["getTodos"]),
-  },
-  methods: {
-    addTodo() {
-      if (this.todo != "") {
-        const newTodo = {
-          task: this.newTodo,
-          active: true,
-        };
-        this.newTodo = "";
-        this.$store.dispatch("addTodo", newTodo);
-      }
-    },
   },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 h1 {
   font-family: "Raleway", sans-serif;
 }
