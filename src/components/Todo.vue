@@ -1,5 +1,5 @@
 <template>
-  <div class="w-1/2 mx-auto flex flex-col items-center">
+  <div class="w-full md:w-1/2 mx-auto flex flex-col items-center">
     <h1 class="text-4xl text-gray-700 font-bold mb-12">#todo</h1>
     <div
       class="header relative text-sm flex justify-between font-semibold items-center text-gray-700 w-full"
